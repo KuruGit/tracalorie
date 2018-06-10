@@ -1,0 +1,86 @@
+!
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tracalorie | Meal and Calorie Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.css">
+
+</head>
+
+<body>
+
+    <!--Nav bar-->
+    <nav>
+        <div class="nav-wrapper blue">
+            <div class="container">
+                <a href="" class="brand-logo center">Tracalorie</a>
+                <ul class="right">
+                    <li>
+                        <a href="#" class="clear-btn btn blue lighten-3">Clear All</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <!--Content Card-->
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Add Meal/Food Item</span>
+                <form action="" class="col">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input type="text" placeholder="Meal Item" id="item-name">
+                            <label for="item-name"></label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input type="text" placeholder="Calories" id="item-calories">
+                            <label for="item-calories"></label>
+                        </div>
+                        <button class="add-btn btn blue darken-3">
+                            <i class="fas fa-plus"></i> Add Meal</button>
+                    <!--erstmal auskommentiert bis auf weiteres  
+                          <button class="update-btn btn orange">
+                            <i class="fas fa-edit"></i> Update Meal</button>
+                        <button class="delete-btn btn red">
+                            <i class="fas fa-trash-alt"></i> Delete Meal</button>
+                            -->
+                        <button class="back-btn btn grey right">
+                            <i class="fas fa-chevron-circle-left"></i> Back</button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Calorie Count-->
+        <h3 class="center-align">Total Calories:<span class="total-calories">0</span></h3>
+        <!--Item List-->
+        <ul id="item-list" class="collection">
+           <!-- <li class="collection-item" id="item-0"><strong>Steak Dinner:</strong><em>1200 Calories</em>
+            <a href="#" class="secondary-content"><i class="fas fa-edit"></i></a>
+            </li>
+            <li class="collection-item" id="item-1"><strong>Cookie:</strong><em>500 Calories</em>
+                <a href="#" class="secondary-content"><i class="fas fa-edit"></i></a>
+                </li>
+                <li class="collection-item" id="item-2"><strong>Döner:</strong><em>9000 Calories</em>
+                    <a href="#" class="secondary-content"><i class="fas fa-edit"></i></a>
+                    </li>-->
+        </ul>
+    </div>
+
+
+
+
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="scripts/app.js"></script>
+
+</body>
+
+</html>
