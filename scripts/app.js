@@ -35,7 +35,8 @@ const ItemCtrl = (function(){
 //UI Controller
 const UiCtrl = (function(){
     const UiSelectors = {
-        itemList: "#item-list"
+        itemList: "#item-list",
+        addBtn:".add-btn"
     }
 
     return {
@@ -48,17 +49,37 @@ const UiCtrl = (function(){
             });
             //Insert List items
             document.querySelector(UiSelectors.itemList).innerHTML = html;
+        },
+        getSelectors: function(){
+            return UiSelectors;
         }
     }
 })();
 
 //App Controller
 const App = (function(ItemCtrl, UiCtrl){
+    // Load event listeners
+    const loadEventListeners = function(){
+        //Get Ui Selectors -> UiSelectors is a private variable of UiCtrl, so we have to take the detour
+        const UiSelectors = UiCtrl.getSelectors();
 
+        //Add item Event
+        document.querySelector(UiSelectors.addBtn).addEventListener("click", itemAddSubmit);
+    }
+
+    //Add item submit
+    const itemAddSubmit = function(e){
+
+
+        e.preventDefault();
+    }
     return {
         init: function(){
             const items = ItemCtrl.getItems();
            UiCtrl.populateItemList(items);
+
+           //Load Eventlisteners
+           loadEventListeners();
         }
     }
     
