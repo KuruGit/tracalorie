@@ -89,6 +89,10 @@ const UiCtrl = (function(){
             //insert item
             document.querySelector(UiSelectors.itemList).insertAdjacentElement("beforeend",li)
         },
+        clearInput: function(){
+            document.querySelector(UiSelectors.itemNameInput).value="";
+            document.querySelector(UiSelectors.ItemCaloriesInput).value="";
+        },
         getSelectors: function(){
             return UiSelectors;
         }
@@ -115,6 +119,9 @@ const App = (function(ItemCtrl, UiCtrl){
             const newItem = ItemCtrl.addItem(input.name, input.calories);
             //Add item to Ui List
             UiCtrl.addListItem(newItem);
+
+            //Clear fields after inserting new Item
+            UiCtrl.clearInput();
         }
 
         e.preventDefault();
