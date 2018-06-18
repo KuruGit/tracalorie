@@ -13,9 +13,9 @@ const ItemCtrl = (function(){
 
     const data = {
         items: [
-            {id:0, name: "Steak Dinner", calories: 1200},
-            {id:1, name: "Cookie", calories: 500},
-            {id:2, name: "Salad", calories: 250},
+            // {id:0, name: "Steak Dinner", calories: 1200},
+            // {id:1, name: "Cookie", calories: 500},
+            // {id:2, name: "Salad", calories: 250},
         ],
         currentItem: null,
         totalCalories: 0
@@ -77,6 +77,8 @@ const UiCtrl = (function(){
         
         },
         addListItem: function(item){
+            //show the list
+            document.querySelector(UiSelectors.itemList).style.display="block";
             //Create li element
             const li = document.createElement("li");
             //Add class
@@ -92,6 +94,9 @@ const UiCtrl = (function(){
         clearInput: function(){
             document.querySelector(UiSelectors.itemNameInput).value="";
             document.querySelector(UiSelectors.ItemCaloriesInput).value="";
+        },
+        hideList: function(){
+            document.querySelector(UiSelectors.itemList).style.display ="none";
         },
         getSelectors: function(){
             return UiSelectors;
@@ -130,7 +135,13 @@ const App = (function(ItemCtrl, UiCtrl){
     return {
         init: function(){
             const items = ItemCtrl.getItems();
-           UiCtrl.populateItemList(items);
+
+            //Check if there are any items, if not call hideList and "hide" the style border of the list. If yes, call populateItemList
+            if (items.length===0) {
+                UiCtrl.hideList();
+            } else {
+                UiCtrl.populateItemList(items);
+            }
 
            //Load Eventlisteners
            loadEventListeners();
