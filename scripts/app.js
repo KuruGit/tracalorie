@@ -64,6 +64,9 @@ const UiCtrl = (function(){
     const UiSelectors = {
         itemList: "#item-list",
         addBtn:".add-btn",
+        updateBtn:".update-btn",
+        deleteBtn:".delete-btn",
+        backBtn:".back-btn",
         itemNameInput:"#item-name",
         ItemCaloriesInput:"#item-calories",
         totalCalories:".total-calories"
@@ -112,6 +115,14 @@ const UiCtrl = (function(){
         showTotalCalories: function(total){
             document.querySelector(UiSelectors.totalCalories).textContent=total;
         },
+        clearEditState: function(){
+            UiCtrl.clearInput();
+            document.querySelector(UiSelectors.updateBtn).style.display ="none";
+            document.querySelector(UiSelectors.deleteBtn).style.display ="none";
+            document.querySelector(UiSelectors.backBtn).style.display ="none";
+            document.querySelector(UiSelectors.addBtn).style.display ="inline";
+
+        },
         getSelectors: function(){
             return UiSelectors;
         }
@@ -150,6 +161,8 @@ const App = (function(ItemCtrl, UiCtrl){
 
     return {
         init: function(){
+            //Clear Edit State
+            UiCtrl.clearEditState();
             const items = ItemCtrl.getItems();
 
             //Check if there are any items, if not call hideList and "hide" the style border of the list. If yes, call populateItemList
