@@ -1,5 +1,46 @@
 //Storage Controller
 
+const StorageCtrl = (function(){
+        //Public methods
+
+    return {
+
+        storeItem: function(item){
+
+            let items = [];
+            //Check if there are items in local storage
+
+            if (localStorage.getItem("items")===null) {
+                items = [];
+                items.push(item);
+                localStorage.setItem("items", JSON.stringify(items));
+
+            } else {
+                items = JSON.parse(localStorage.getItem("items"));
+                //Push new item
+                items.push(item);
+                //save to ls again
+                localStorage.setItem("items", JSON.stringify(items));
+            }
+
+        },
+        
+        getItemsFromStorage: function(){
+            let items = [];
+            if (localStorage.getItem("items" === null)) {
+                items = [];
+                console.log(items);
+            }else {
+                items = JSON.parse(localStorage.getItem("items"));
+            }
+
+            return items;
+
+        }
+    }
+
+})();
+
 //Item Controller
 const ItemCtrl = (function(){
     //Item Constructor
@@ -11,12 +52,8 @@ const ItemCtrl = (function(){
 
     //Data structure / State
 
-    const data = {
-        items: [
-            // {id:0, name: "Steak Dinner", calories: 1200},
-            // {id:1, name: "Cookie", calories: 500},
-            // {id:2, name: "Salad", calories: 250},
-        ],
+    let data = {
+        items: StorageCtrl.getItemsFromStorage(),
         currentItem: null,
         totalCalories: 0
     }
@@ -216,7 +253,7 @@ const UiCtrl = (function(){
 })();
 
 //App Controller
-const App = (function(ItemCtrl, UiCtrl){
+const App = (function(ItemCtrl,StorageCtrl,UiCtrl){
     // Load event listeners
     const loadEventListeners = function(){
         //Get Ui Selectors -> UiSelectors is a private variable of UiCtrl, so we have to take the detour
@@ -265,6 +302,9 @@ const App = (function(ItemCtrl, UiCtrl){
             const totalCalories = ItemCtrl.getTotalCalories();
             //Add totalCalories to UI
             UiCtrl.showTotalCalories(totalCalories);
+
+            //Store in local storage
+            StorageCtrl.storeItem(newItem);
 
             //Clear fields after inserting new Item
             UiCtrl.clearInput();
@@ -349,10 +389,10 @@ const App = (function(ItemCtrl, UiCtrl){
         init: function(){
             //Clear Edit State
             UiCtrl.clearEditState();
-            const items = ItemCtrl.getItems();
+            let items = ItemCtrl.getItems();
 
             //Check if there are any items, if not call hideList and "hide" the style border of the list. If yes, call populateItemList
-            if (items.length===0) {
+            if (items.length === 0) {
                 UiCtrl.hideList();
             } else {
                 UiCtrl.populateItemList(items);
@@ -365,7 +405,7 @@ const App = (function(ItemCtrl, UiCtrl){
         }
     }
     
-})(ItemCtrl, UiCtrl);
+})(ItemCtrl,StorageCtrl,UiCtrl);
 
 //Initialize App
 
