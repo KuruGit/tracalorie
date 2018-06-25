@@ -7,31 +7,30 @@ const StorageCtrl = (function(){
 
         storeItem: function(item){
 
-            let items = [];
+            let items;
             //Check if there are items in local storage
 
-            if (localStorage.getItem("items")===null) {
+            if (localStorage.getItem('items')=== null) {
                 items = [];
                 items.push(item);
-                localStorage.setItem("items", JSON.stringify(items));
+                //Set item in local storage
+                localStorage.setItem('items', JSON.stringify(items));
 
             } else {
-                items = JSON.parse(localStorage.getItem("items"));
+                items = JSON.parse(localStorage.getItem('items'));
                 //Push new item
                 items.push(item);
                 //save to ls again
-                localStorage.setItem("items", JSON.stringify(items));
+                localStorage.setItem('items', JSON.stringify(items));
             }
 
         },
-        
         getItemsFromStorage: function(){
-            let items = [];
-            if (localStorage.getItem("items" === null)) {
+            let items;
+            if (localStorage.getItem('items') === null) {
                 items = [];
-                console.log(items);
-            }else {
-                items = JSON.parse(localStorage.getItem("items"));
+            } else {
+                items = JSON.parse(localStorage.getItem('items'));
             }
 
             return items;
@@ -52,7 +51,7 @@ const ItemCtrl = (function(){
 
     //Data structure / State
 
-    let data = {
+    const data = {
         items: StorageCtrl.getItemsFromStorage(),
         currentItem: null,
         totalCalories: 0
@@ -389,10 +388,11 @@ const App = (function(ItemCtrl,StorageCtrl,UiCtrl){
         init: function(){
             //Clear Edit State
             UiCtrl.clearEditState();
-            let items = ItemCtrl.getItems();
+            let items = [];
+            items = ItemCtrl.getItems();
 
             //Check if there are any items, if not call hideList and "hide" the style border of the list. If yes, call populateItemList
-            if (items.length === 0) {
+            if (items.length === 0 || items === null) {
                 UiCtrl.hideList();
             } else {
                 UiCtrl.populateItemList(items);
